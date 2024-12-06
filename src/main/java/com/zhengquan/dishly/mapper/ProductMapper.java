@@ -1,4 +1,9 @@
 package com.zhengquan.dishly.mapper;
 
-public class ProductMapper {
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.zhengquan.dishly.entity.Product;
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface ProductMapper extends BaseMapper<Product> {
 }

@@ -1,4 +1,4 @@
-package com.zhengquan.dishly.demos.web;
+package com.zhengquan.dishly.demos.web.ro;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -7,7 +7,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class OrderRequest {
 
-    private String orderId;
+    private String openId;
+    private String paymentMethod;
     private String productId;
 
 }

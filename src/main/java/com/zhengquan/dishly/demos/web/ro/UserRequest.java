@@ -1,4 +1,4 @@
-package com.zhengquan.dishly.demos.web;
+package com.zhengquan.dishly.demos.web.ro;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

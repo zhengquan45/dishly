@@ -5,9 +5,9 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class PayRequest {
+public class PayCardRequest {
 
-    private Long orderId;
+    private Long userCardId;
 
     private Long userId;
 

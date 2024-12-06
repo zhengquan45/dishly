@@ -3,10 +3,18 @@ package com.zhengquan.dishly.demos.web.ro;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.time.LocalDate;
+
 @Data
 @Accessors(chain = true)
-public class UserCardRequest {
+public class UserCardUpdateRequest {
 
-    private String cardTemplateId;
+    private Long userCardId;
+
+    private String status;
+
+    private Integer remainingUses;   // 剩余次数
+
+    private LocalDate endDate;
 
 }
