@@ -1,4 +1,4 @@
-package com.zhengquan.dishly.entity;
+package com.zhengquan.dishly.demos.web.vo;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -8,10 +8,9 @@ import java.time.LocalDateTime;
 
 @Data
 @Accessors(chain = true)
-public class Order {
+public class OrderVo {
 
     private Long id; // 订单ID
-    private String orderNo; //订单编号
     private Long userId; // 用户名称
     private String deliveryAddress; // 用户地址
     private String paymentMethod; // 支付方式 (WEEK_CARD, MONTH_CARD, CASH)
