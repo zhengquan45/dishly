@@ -2,11 +2,12 @@ package com.zhengquan.dishly.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.zhengquan.dishly.demos.web.ro.ProductRequest;
-import com.zhengquan.dishly.demos.web.vo.PageResult;
-import com.zhengquan.dishly.demos.web.vo.ProductVo;
+import com.zhengquan.dishly.entity.ro.ProductRequest;
+import com.zhengquan.dishly.entity.vo.PageResult;
+import com.zhengquan.dishly.entity.vo.ProductVo;
 import com.zhengquan.dishly.entity.Product;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,8 @@ public class ProductService extends BaseService<Product> {
     }
 
     public PageResult<ProductVo> page(String name, String category, Boolean isAvailable, Integer current, Integer pageSize) {
-        Page<Product> productPage = getBaseMapper().selectPage(Page.of(current, pageSize), Wrappers.lambdaQuery(Product.class)
+        Page<Product> page = new Page<Product>(current, pageSize).addOrder(OrderItem.desc(StrUtil.toUnderlineCase(Product.Fields.createdAt)));
+        Page<Product> productPage = getBaseMapper().selectPage(page, Wrappers.lambdaQuery(Product.class)
                 .like(StrUtil.isNotBlank(name), Product::getName, name)
                 .eq(StrUtil.isNotEmpty(category), Product::getCategory, category)
                 .eq(Objects.nonNull(isAvailable), Product::getIsAvailable, isAvailable));
@@ -35,7 +37,7 @@ public class ProductService extends BaseService<Product> {
         }).collect(Collectors.toList());
         return new PageResult<ProductVo>()
                 .setSuccess(true)
-                .setTotal(productVoList.size())
+                .setTotal(productPage.getTotal())
                 .setData(productVoList)
                 .setPageSize(pageSize)
                 .setCurrent(current);

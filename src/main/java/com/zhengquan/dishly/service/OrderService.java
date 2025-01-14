@@ -1,15 +1,14 @@
 package com.zhengquan.dishly.service;
 
 import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.zhengquan.dishly.demos.web.ro.OrderDetailRequest;
-import com.zhengquan.dishly.demos.web.ro.OrderRequest;
-import com.zhengquan.dishly.demos.web.vo.OrderVo;
-import com.zhengquan.dishly.demos.web.vo.PageResult;
+import com.zhengquan.dishly.entity.ro.OrderDetailRequest;
+import com.zhengquan.dishly.entity.ro.OrderRequest;
+import com.zhengquan.dishly.entity.vo.OrderVo;
+import com.zhengquan.dishly.entity.vo.PageResult;
 import com.zhengquan.dishly.entity.Order;
 import com.zhengquan.dishly.entity.OrderDetail;
 import com.zhengquan.dishly.entity.Product;
@@ -83,7 +82,7 @@ public class OrderService extends BaseService<Order> {
         Order order = new Order();
         order.setOrderNo(OrderNoGeneratorUtils.generateOrderId());
         order.setUserId(user.getId());
-        order.setDeliveryAddress(user.getDeliveryAddress());
+//        order.setDeliveryAddress(user.getDeliveryAddress());
         order.setPaymentMethod(orderRequest.getPaymentMethod());
         order.setTotalAmount(totalAmount);
         order.setStatus("CREATED");
@@ -109,7 +108,6 @@ public class OrderService extends BaseService<Order> {
                                     Integer pageSize) {
         List<User> userList = userMapper.selectList(Wrappers.lambdaQuery(User.class)
                 .select(User::getId)
-                .like(User::getContactName, name)
                 .or()
                 .like(User::getNickname, name));
         List<Long> userIdList = userList.stream().map(User::getId).collect(Collectors.toList());
@@ -127,7 +125,7 @@ public class OrderService extends BaseService<Order> {
         }).collect(Collectors.toList());
         return new PageResult<OrderVo>()
                 .setSuccess(true)
-                .setTotal(orderVoList.size())
+                .setTotal(orderPage.getTotal())
                 .setData(orderVoList)
                 .setPageSize(pageSize)
                 .setCurrent(current);

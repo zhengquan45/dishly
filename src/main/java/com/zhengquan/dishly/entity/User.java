@@ -25,11 +25,7 @@ public class User {
 
     private String avatarUrl;  // 用户头像URL
 
-    private String deliveryAddress;  // 送餐地址
-
-    private String contactName;  // 收件人姓名
-
-    private String contactPhone;  // 收件人电话
+    private String phone;  // 电话
 
     private Integer gender = 0;  // 用户性别（0: 未知，1: 男，2: 女）
 

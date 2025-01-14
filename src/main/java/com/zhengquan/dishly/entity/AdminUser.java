@@ -2,38 +2,46 @@ package com.zhengquan.dishly.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.zhengquan.dishly.config.LocalDateTimeToTimestampSerializer;
 import lombok.Data;
+import lombok.experimental.FieldNameConstants;
 
 import java.time.LocalDateTime;
 
-@TableName("banner")
-@Data
-public class Banner {
 
-    @TableId
+@FieldNameConstants
+@TableName("admin_user")
+@Data
+public class AdminUser {
+
+    // 管理员ID
     private Long id;
 
-    private String name;
+    // 管理员用户名
+    private String username;
 
-    private BannerType type;
+    // 加密后的登录密码
+    private String password;
 
-    private Integer priority;
+    // 昵称
+    private String nickname;
 
-    private ContentType contentType;
+    // 头像
+    private String avatar;
 
-    private String contentUrl;
+    // 邮箱地址
+    private String email;
 
-    private String clickUrl;
+    // 手机号
+    private String phone;
 
-    private LocalDateTime startTime;
+    // 是否为超级管理员（1=是，0=否）
+    private Boolean isSuperAdmin;
 
-    private LocalDateTime endTime;
-
-    private Boolean status = true;
+    // 状态（1=正常，0=禁用）
+    private Boolean status;
 
     @TableField(fill = FieldFill.INSERT)  // 自动填充字段，插入时自动填充
     @JsonSerialize(using = LocalDateTimeToTimestampSerializer.class)
@@ -43,13 +51,6 @@ public class Banner {
     @JsonSerialize(using = LocalDateTimeToTimestampSerializer.class)
     private LocalDateTime updatedAt;  // 更新时间
 
-    // Enum for BannerType
-    public enum BannerType {
-        BANNER, INTERSTITIAL, NATIVE, REWARDED_VIDEO, FLOATING, RECOMMENDATION
-    }
-
-    // Enum for ContentType
-    public enum ContentType {
-        IMAGE, VIDEO, HTML
-    }
 }
+
+ 
