@@ -34,7 +34,7 @@ public class BannerController {
 
 
     @GetMapping
-    public ResponseEntity<?> list(@RequestParam(value = "name",required = false)String name,
+    public ResponseEntity<?> page(@RequestParam(value = "name",required = false)String name,
                                   @RequestParam(value = "type",required = false) Banner.BannerType type,
                                   @RequestParam(value="status",required = false)Boolean status,
                                   @RequestParam("current") Integer current,

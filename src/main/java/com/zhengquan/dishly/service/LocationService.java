@@ -1,5 +1,6 @@
 package com.zhengquan.dishly.service;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.zhengquan.dishly.entity.Location;
 import com.zhengquan.dishly.entity.vo.LocationVo;
@@ -10,6 +11,7 @@ import org.springframework.data.redis.connection.RedisGeoCommands;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,7 +48,9 @@ public class LocationService extends BaseService<Location> {
             String id = (String) e.getContent().getName();
             return Integer.valueOf(id);
         }).collect(Collectors.toList());
-
+        if(CollectionUtil.isEmpty(idList)){
+            return Collections.emptyList();
+        }
         List<Location> locations = getBaseMapper().selectByIds(idList);
         return locations.stream().map(location -> {
             LocationVo locationVo = new LocationVo();

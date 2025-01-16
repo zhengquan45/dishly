@@ -8,7 +8,6 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.zhengquan.dishly.entity.ro.UserRequest;
 import com.zhengquan.dishly.entity.ro.WechatLoginRequest;
-import com.zhengquan.dishly.entity.vo.CurrentUserVo;
 import com.zhengquan.dishly.entity.vo.UserVo;
 import com.zhengquan.dishly.service.UserService;
 import com.zhengquan.dishly.utils.StpKit;
